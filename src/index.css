@@ -7,3 +7,8 @@
   box-sizing: border-box;
   font-family: 'Elms Sans', sans-serif;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+

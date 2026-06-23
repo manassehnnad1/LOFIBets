@@ -62,7 +62,7 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
               items={[
                 { label: "markets", href: "#markets", ariaLabel: "Markets", rotation: -8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
                 { label: "how it works", href: "#how-it-works", ariaLabel: "How it works", rotation: 8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
-                { label: "about", href: "#about", ariaLabel: "About", rotation: 8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
+                { label: "about", href: "/about", ariaLabel: "About", rotation: 8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
               ]}
             />
           </div>
@@ -86,7 +86,7 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
             <p className="text-white translate-x-8 md:translate-x-2 translate-y-2">Trade Markets with your $LOFI tokens.</p>
 
             <button
-              className="rounded-2xl text-lg font-semibold text-[#0a0d14] cursor-pointer border-none transition-all duration-200 translate-y-4 md:w-[400px] hover:-translate-y-px w-full"
+              className="rounded-2xl text-lg font-semibold text-[#0a0d14] cursor-pointer border-none transition-all hover:translate-x-[4px] duration-200 translate-y-4 md:w-[400px] w-full"
               style={{
                 background: "#ffffff",
                 fontFamily: "'Elms Sans', sans-serif",
@@ -94,7 +94,7 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
                 marginTop: "10px",
               }}
             >
-              Launch App <MoveUpRight className="inline-block ml-2" size={12} />
+              Launch App <MoveUpRight className="inline-block ml-2 " size={12}  />
             </button>
 
           </div>
