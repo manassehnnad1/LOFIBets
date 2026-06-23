@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Hero from './components/Hero'
 import About from './components/About'
 import useLenis from './hooks/useLenis'
+import HowItWorks from './components/HowItWorks'
 
 const Home = () => (
   <div>
@@ -23,6 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
       </Routes>
     </BrowserRouter>
   )
