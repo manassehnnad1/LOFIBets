@@ -35,8 +35,8 @@ export default function About() {
           >
             About LOFIBets
           </h1>
-          <p className="text-lg md:text-xl text-white/70 leading-relaxed">
-            LOFIBets is a community-first prediction market built on Sui. Here we place simple, honest bets on the things that matter to the Lofi ecosystem, with clarity, trust, and no unnecessary complexity.
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+            LOFIBets is a community-first prediction market built on Sui. Here we place simple, honest bets directly with our $LOFI & $SUI tokens on the things that matter to the Lofi ecosystem, with clarity, trust, and no unnecessary complexity.
           </p>
         </div>
       </div>

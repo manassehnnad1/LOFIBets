@@ -94,7 +94,7 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
                 marginTop: "10px",
               }}
             >
-              Launch App <MoveUpRight className="inline-block ml-2 " size={12}  />
+              Enter Markets <MoveUpRight className="inline-block ml-2 " size={12}  />
             </button>
 
           </div>

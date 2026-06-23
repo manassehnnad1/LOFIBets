@@ -36,7 +36,7 @@ export default function HowItWorks() {
           >
             How It Works
           </h1>
-          <p className="text-lg md:text-xl font-bold text-white/70 leading-relaxed">
+          <p className="text-lg md:text-xl font-bold text-white/80 leading-relaxed">
             1. Connect your Wallet <br /> 2. Find a market <br /> 3. Place a bet with your $LOFI  or $SUI tokens and Win.
           </p>
 
