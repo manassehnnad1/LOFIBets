@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import useLenis from './hooks/useLenis'
 import HowItWorks from './components/HowItWorks'
+import Markets from './components/Markets'
 
 const Home = () => (
   <div>
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/markets" element={<Markets />} />
       </Routes>
     </BrowserRouter>
   )

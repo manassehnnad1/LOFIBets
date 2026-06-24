@@ -60,7 +60,7 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
               menuContentColor="#0a0d14"
               useFixedPosition={true}
               items={[
-                { label: "markets", href: "#markets", ariaLabel: "Markets", rotation: -8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
+                { label: "markets", href: "/markets", ariaLabel: "Markets", rotation: -8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
                 { label: "how it works", href: "/how-it-works", ariaLabel: "How it works", rotation: 8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
                 { label: "about", href: "/about", ariaLabel: "About", rotation: 8, hoverStyles: { bgColor: "#b9d4f1", textColor: "#ffffff" } },
               ]}
