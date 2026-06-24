@@ -127,10 +127,10 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
 
         {/* Pool bar */}
         <div style={{ width: "100%", height: "8px", borderRadius: "999px", background: "#f4f6f9", overflow: "hidden", marginBottom: "8px" }}>
-          <div style={{ width: `${yesPct}%`, height: "100%", borderRadius: "999px", background: "linear-gradient(to right, #2E8FFF, #6db8ff)" }} />
+          <div style={{ width: `${yesPct}%`, height: "100%", borderRadius: "999px", background: "linear-gradient(to right, #3d4f7c, #6db8ff)" }} />
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", fontWeight: 600, marginBottom: "24px" }}>
-          <span style={{ color: "#2E8FFF" }}>YES {yesPct}%</span>
+          <span style={{ color: "#3d4f7c" }}>YES {yesPct}%</span>
           <span style={{ color: "rgba(10,13,20,0.4)" }}>NO {noPct}%</span>
         </div>
 
