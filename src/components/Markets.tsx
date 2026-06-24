@@ -23,11 +23,10 @@ const MARKETS = [
     id: "3",
     question: "Will Sui Network surpass $10B TVL by Q3 2026?",
     category: "Sui",
-    emoji: "🌊",
     yesPool: 9100,
     noPool: 15300,
     endsAt: "Sept 30, 2026",
-    image: "/imgy4.png",
+    image: "/imgy4.jpg",
   },
 ];
 
@@ -152,10 +151,9 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
               fontSize: "0.9rem",
               fontWeight: 700,
               cursor: "pointer",
-              border: "2px solid #2E8FFF",
-              background: choice === "yes" ? "#2E8FFF" : "transparent",
-              color: choice === "yes" ? "#ffffff" : "#2E8FFF",
-              boxShadow: choice === "yes" ? "0 4px 0 #1a6fd4" : "0 4px 0 #c8deff",
+              border: "2px solid #3d4f7c",
+              background: choice === "yes" ? "#3d4f7c" : "transparent",
+              color: choice === "yes" ? "#ffffff" : "#3d4f7c",
               transition: "all 0.15s",
             }}
           >
@@ -208,7 +206,7 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
             fontWeight: 700,
             cursor: choice && amount ? "pointer" : "not-allowed",
             border: "none",
-            background: choice && amount ? "#2E8FFF" : "#f4f6f9",
+            background: choice && amount ? "#3d4f7c" : "#f4f6f9",
             color: choice && amount ? "#ffffff" : "rgba(10,13,20,0.3)",
             boxShadow: choice && amount ? "0 5px 0 #1a6fd4" : "0 5px 0 #d8dce2",
             transition: "all 0.15s",
@@ -245,17 +243,16 @@ export default function Markets() {
 
         {/* ── Navbar ── */}
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 5vw", borderBottom: "1px solid rgba(10,13,20,0.06)" }}>
-          <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.6rem", letterSpacing: "0.1em", color: "#0a0d14" }}>
+          <span style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "1.2rem", color: "#0a0d14" }}>
             LOFIBets
           </span>
 
           <button
             style={{
-              fontFamily: "'Slackey', sans-serif",
+              fontFamily: "'Elms Sans', sans-serif",
               fontSize: "0.9rem",
               fontWeight: 700,
               padding: "12px 24px",
-              borderRadius: "16px",
               background: "#3d4f7c",
               color: "#ffffff",
               border: "none",
@@ -270,12 +267,9 @@ export default function Markets() {
 
         {/* ── Page header ── */}
         <div style={{ padding: "48px 5vw 24px" }}>
-          <h1 style={{ fontFamily: "'Slackey', sans-serif", fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "#0a0d14", margin: "0 0 6px" }}>
+          <h1 style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "clamp(1.0rem, 4vw, 1.0rem)", color: "#0a0d14", margin: "0 0 6px" }}>
             All Markets
           </h1>
-          <p style={{ fontSize: "0.85rem", color: "rgba(10,13,20,0.4)", margin: 0 }}>
-            Bet with $LOFI · On-chain · Trustless
-          </p>
         </div>
 
         {/* ── Category filter ── */}
@@ -290,7 +284,7 @@ export default function Markets() {
                 fontSize: "0.75rem",
                 fontWeight: 600,
                 cursor: "pointer",
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'Elms Sans', sans-serif",
                 background: activeCategory === cat ? "#0a0d14" : "transparent",
                 color: activeCategory === cat ? "#ffffff" : "#0a0d14",
                 border: `1px solid ${activeCategory === cat ? "#0a0d14" : "rgba(10,13,20,0.15)"}`,
@@ -313,7 +307,7 @@ export default function Markets() {
                 style={{
                   background: "#ffffff",
                   border: "2px solid rgba(10,13,20,0.07)",
-                  borderRadius: "24px",
+
                   padding: "24px",
                   display: "flex",
                   flexDirection: "column",
@@ -327,8 +321,8 @@ export default function Markets() {
               >
                 {/* Top row — category + small image thumbnail */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#2E8FFF" }}>
-                    {market.emoji} {market.category}
+                  <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#3d4f7c" }}>
+                {market.category}
                   </span>
 
                   {/* ── Small thumbnail image ── */}
@@ -346,18 +340,18 @@ export default function Markets() {
                 </div>
 
                 {/* Question */}
-                <h3 style={{ fontFamily: "'Slackey', sans-serif", fontSize: "0.95rem", color: "#0a0d14", margin: 0, lineHeight: 1.4 }}>
+                <h3 style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "0.95rem", color: "#0a0d14", margin: 0, lineHeight: 1.4 }}>
                   {market.question}
                 </h3>
 
                 {/* Pool bar */}
                 <div style={{ width: "100%", height: "6px", borderRadius: "999px", background: "#f4f6f9", overflow: "hidden" }}>
-                  <div style={{ width: `${yesPct}%`, height: "100%", borderRadius: "999px", background: "linear-gradient(to right, #2E8FFF, #6db8ff)" }} />
+                  <div style={{ width: `${yesPct}%`, height: "100%", borderRadius: "999px", background: "linear-gradient(to right, #3d4f7c, #6db8ff)" }} />
                 </div>
 
                 {/* Pct labels */}
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", fontWeight: 600 }}>
-                  <span style={{ color: "#2E8FFF" }}>YES {yesPct}%</span>
+                  <span style={{ color: "#3d4f7c" }}>YES {yesPct}%</span>
                   <span style={{ color: "rgba(10,13,20,0.4)" }}>NO {noPct}%</span>
                 </div>
 
@@ -372,14 +366,13 @@ export default function Markets() {
                       onClick={(e) => { e.stopPropagation(); setSelectedMarket(market); }}
                       style={{
                         padding: "7px 16px",
-                        borderRadius: "12px",
-                        fontFamily: "'Slackey', sans-serif",
+                        fontFamily: "'Elms Sans', sans-serif",
                         fontSize: "0.75rem",
                         fontWeight: 700,
                         cursor: "pointer",
                         background: "transparent",
-                        color: "#2E8FFF",
-                        border: "2px solid #2E8FFF",
+                        color: "#3d4f7c",
+                        border: "2px solid #3d4f7c",
                         boxShadow: "0 3px 0 #c8deff",
                       }}
                     >
@@ -389,8 +382,7 @@ export default function Markets() {
                       onClick={(e) => { e.stopPropagation(); setSelectedMarket(market); }}
                       style={{
                         padding: "7px 16px",
-                        borderRadius: "12px",
-                        fontFamily: "'Slackey', sans-serif",
+                        fontFamily: "'Elms Sans', sans-serif",
                         fontSize: "0.75rem",
                         fontWeight: 700,
                         cursor: "pointer",
