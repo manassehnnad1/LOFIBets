@@ -3,24 +3,20 @@ import { useState } from "react";
 const MARKETS = [
   {
     id: "1",
-    question: "Will Argentina win their 2026 World Cup match today?",
+    question: "Will France win their 2026 World Cup match today?",
     category: "World Cup",
-    emoji: "⚽",
     yesPool: 12400,
     noPool: 8600,
     endsAt: "June 26, 2026",
-    hot: true,
-    image: "/market1.png", // drop your image in public/
+    image: "/imgy3.jpg", 
   },
   {
     id: "2",
     question: "Will $LOFI hit $1 before the end of July 2026?",
     category: "$LOFI",
-    emoji: "🎯",
     yesPool: 34200,
     noPool: 21800,
     endsAt: "July 31, 2026",
-    hot: true,
     image: "/imgy2.jpg",
   },
   {
@@ -31,8 +27,7 @@ const MARKETS = [
     yesPool: 9100,
     noPool: 15300,
     endsAt: "Sept 30, 2026",
-    hot: false,
-    image: "/market3.png",
+    image: "/imgy4.png",
   },
 ];
 
@@ -200,7 +195,6 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
             onChange={(e) => setAmount(e.target.value)}
             style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontFamily: "'Inter', sans-serif", fontSize: "1rem", fontWeight: 600, color: "#0a0d14" }}
           />
-          <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(10,13,20,0.3)" }}>$LOFI</span>
         </div>
 
         {/* Place bet */}
@@ -225,7 +219,7 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
         </button>
 
         <p style={{ textAlign: "center", fontSize: "0.7rem", color: "rgba(10,13,20,0.3)", marginTop: "14px" }}>
-          Ends {market.endsAt} · On-chain via Sui
+          Ends {market.endsAt} 
         </p>
       </div>
     </div>
@@ -247,7 +241,7 @@ export default function Markets() {
         rel="stylesheet"
       />
 
-      <div style={{ minHeight: "100vh", background: "#ffffff", fontFamily: "'Inter', sans-serif" }}>
+      <div style={{ minHeight: "100vh", background: "#ffffff", fontFamily: "'Elms Sans', sans-serif" }}>
 
         {/* ── Navbar ── */}
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 5vw", borderBottom: "1px solid rgba(10,13,20,0.06)" }}>
