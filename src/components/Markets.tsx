@@ -28,6 +28,15 @@ const MARKETS = [
     endsAt: "Sept 30, 2026",
     image: "/imgy4.jpg",
   },
+  {
+    id: "4",
+    question: "Will Messi score a goal in the Argentina vs. Jordan match?",
+    category: "World Cup",
+    yesPool: 9100,
+    noPool: 15300,
+    endsAt: "June 28, 2026",
+    image: "/messi.jpg",
+  },
 ];
 
 const CATEGORIES = ["All", "World Cup", "$LOFI", "Sui", "Crypto", "Sports"];
