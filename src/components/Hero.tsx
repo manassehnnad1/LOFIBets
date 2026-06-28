@@ -85,7 +85,7 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
               Win.
             </h1>
 
-            <p className="text-white translate-x-8 md:translate-x-2 translate-y-2">Trade Markets with your $LOFI tokens.</p>
+            <p className="text-white translate-x-8 md:translate-x-2 translate-y-2">Trade Markets directly on SUI.</p>
 
             <button
               onClick={() => navigate("/markets")}

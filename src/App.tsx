@@ -10,6 +10,7 @@ import About from './components/About'
 import useLenis from './hooks/useLenis'
 import HowItWorks from './components/HowItWorks'
 import Markets from './components/Markets'
+import MyBets from './components/MyBets'
 
 const Home = () => (
   <div>
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/markets" element={<Markets />} />
+        <Route path="/my-bets" element={<MyBets />} />
       </Routes>
     </BrowserRouter>
   )

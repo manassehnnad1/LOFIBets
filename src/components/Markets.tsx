@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import MyBets from "./MyBets";
 
 const MARKETS = [
   {
@@ -236,6 +238,7 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
 export default function Markets() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedMarket, setSelectedMarket] = useState<Market | null>(null);
+  const navigate = useNavigate();
 
   const filtered = activeCategory === "All"
     ? MARKETS
@@ -256,26 +259,46 @@ export default function Markets() {
             LOFIBets
           </span>
 
-          <button
-            style={{
-              fontFamily: "'Elms Sans', sans-serif",
-              fontSize: "0.9rem",
-              fontWeight: 700,
-              padding: "12px 24px",
-              background: "#3d4f7c",
-              color: "#ffffff",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "0 5px 0 #232d47",
-              letterSpacing: "0.02em",
-            }}
-          >
-            Connect Wallet
-          </button>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+            <button
+              onClick={() => navigate("/my-bets")}
+              style={{
+                fontFamily: "'Elms Sans', sans-serif",
+                fontSize: "0.8rem",
+                fontWeight: 500,
+                padding: "8px 24px",
+                background: "transparent",
+                color: "#000000",
+                border: "2px solid #91b1d5",
+                cursor: "pointer",
+                boxShadow: "none",
+                letterSpacing: "0.02em",
+                borderRadius: "999px",
+              }}
+            >
+              My Bets
+            </button>
+            <button
+              style={{
+                fontFamily: "'Elms Sans', sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 700,
+                padding: "12px 24px",
+                background: "#3d4f7c",
+                color: "#ffffff",
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "0 5px 0 #232d47",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Connect Wallet
+            </button>
+          </div>
         </nav>
 
         {/* ── Page header ── */}
-        <div style={{ padding: "48px 5vw 24px" }}>
+        <div style={{ padding: "48px 5vw 24px", display:"flex", gap:"12px" }}>
           <h1 style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "clamp(1.0rem, 4vw, 1.0rem)", color: "#0a0d14", margin: "0 0 6px" }}>
             All Markets
           </h1>
