@@ -113,39 +113,47 @@ function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
             position: "relative",
             zIndex: 1,
           }}>
-            {/* barcode lines */}
-            <div style={{ display: "flex", gap: "2px", alignItems: "center" }}>
-              {[3, 5, 2, 4, 3, 5, 2, 3, 4, 2, 5, 3].map((h, i) => (
-                <div key={i} style={{ width: "2px", height: `${h * 2}px`, background: "rgba(0,0,0,0.5)", borderRadius: "1px" }} />
-              ))}
-            </div>
-            <span style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "0.75rem",
-              letterSpacing: "0.12em",
-              color: "rgba(0,0,0,0.6)",
-            }}>
-              LVL {Math.floor(Math.random() * 9000) + 1000}
-            </span>
           </div>
 
           {/* Yeti image */}
           <div style={{
-            width: "160px",
-            height: "160px",
-            position: "relative",
-            zIndex: 1,
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            overflow: "hidden",
           }}>
             <img
-              src={yetiImage}
+              src="/pnl1.jpg"
               alt="Yeti"
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
+                objectFit: "cover",
+                objectPosition: "center",
                 imageRendering: "pixelated",
               }}
             />
+          </div>
+          <div style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            position: "relative",
+            zIndex: 1,
+          }}>
+            {/* top bar */}
+            <div style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "16px",
+              position: "relative",
+              zIndex: 1,
+            }}>
+              
+            </div>
           </div>
         </div>
 
@@ -164,18 +172,8 @@ function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
             <span style={{
               fontSize: "0.6rem",
               fontWeight: 700,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
               color: "rgba(255,255,255,0.35)",
-              fontFamily: "'Inter', sans-serif",
-            }}>
-              YETIBETS 2026 · #{bet.id.slice(-4)}
-            </span>
-            <span style={{
-              fontSize: "0.6rem",
-              fontWeight: 700,
-              color: "rgba(255,255,255,0.35)",
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Elms Sans', sans-serif",
             }}>
               {bet.won ? "W" : "L"}/10
             </span>
@@ -185,7 +183,7 @@ function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
           <h2 style={{
             fontFamily: "'Slackey', sans-serif",
             fontSize: "1.6rem",
-            color: bet.won ? "#4ade80" : "#f87171",
+            color: bet.won ? "#D6FFFA" : "#f87171",
             margin: "0 0 4px",
             lineHeight: 1.1,
           }}>
@@ -198,69 +196,11 @@ function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
             color: "rgba(255,255,255,0.45)",
             margin: "0 0 16px",
             lineHeight: 1.5,
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Elms Sans', sans-serif",
           }}>
             {bet.question}
           </p>
 
-          {/* stats row */}
-          <div style={{
-            display: "flex",
-            gap: "12px",
-            marginBottom: "20px",
-            paddingBottom: "16px",
-            borderBottom: "1px solid rgba(255,255,255,0.08)",
-          }}>
-            <div style={{ flex: 1 }}>
-              <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>
-                Staked
-              </span>
-              <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.3rem", color: "#ffffff", margin: "2px 0 0", letterSpacing: "0.06em" }}>
-                {bet.amount} LOFI
-              </p>
-            </div>
-            {bet.won && (
-              <>
-                <div style={{ width: "1px", background: "rgba(255,255,255,0.08)" }} />
-                <div style={{ flex: 1 }}>
-                  <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>
-                    Payout
-                  </span>
-                  <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.3rem", color: "#4ade80", margin: "2px 0 0", letterSpacing: "0.06em" }}>
-                    {bet.payout} LOFI
-                  </p>
-                </div>
-                <div style={{ width: "1px", background: "rgba(255,255,255,0.08)" }} />
-                <div style={{ flex: 1 }}>
-                  <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>
-                    Profit
-                  </span>
-                  <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.3rem", color: "#4ade80", margin: "2px 0 0", letterSpacing: "0.06em" }}>
-                    +{profit} LOFI
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* icons row */}
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "20px",
-          }}>
-            <div style={{ display: "flex", gap: "12px" }}>
-              {/* globe icon */}
-              <div style={{ width: "28px", height: "28px", border: "2px solid rgba(255,255,255,0.2)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>🌐</div>
-              {/* sui icon */}
-              <div style={{ width: "28px", height: "28px", border: "2px solid rgba(255,255,255,0.2)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>💧</div>
-              {/* lofi icon */}
-              <div style={{ width: "28px", height: "28px", border: "2px solid rgba(255,255,255,0.2)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>🎵</div>
-            </div>
-            {/* discord-style box */}
-            <div style={{ width: "28px", height: "28px", border: "2px solid rgba(255,255,255,0.2)", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>🎮</div>
-          </div>
 
           {/* claim button */}
           {bet.won && (
@@ -275,9 +215,9 @@ function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
                 fontWeight: 700,
                 cursor: "pointer",
                 border: "none",
-                background: "#4ade80",
+                background: "#D6FFFA",
                 color: "#0a0d14",
-                boxShadow: "0 5px 0 #16a34a",
+                boxShadow: "0 5px 0 #f0fdfa",
                 transition: "all 0.15s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
@@ -340,8 +280,8 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
         {/* Section header */}
         <div style={{ marginBottom: "24px" }}>
           <h2 style={{
-            fontFamily: "'Slackey', sans-serif",
-            fontSize: "clamp(1.4rem, 3vw, 2rem)",
+            fontFamily: "'Elms Sans', sans-serif",
+            fontSize: "clamp(1.0rem, 3vw, 1.4rem)",
             color: "#0a0d14",
             margin: "0 0 4px",
           }}>
@@ -382,7 +322,7 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
                 {/* Left — question + meta */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <p style={{
-                    fontFamily: "'Slackey', sans-serif",
+                    fontFamily: "'Elms Sans', sans-serif",
                     fontSize: "0.88rem",
                     color: "#0a0d14",
                     margin: "0 0 6px",
@@ -444,9 +384,9 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
                       fontWeight: 700,
                       cursor: "pointer",
                       border: "none",
-                      background: "#4ade80",
-                      color: "#0a0d14",
-                      boxShadow: "0 4px 0 #16a34a",
+                      background: "#232d47",
+                      color: "#ffffff",
+                      boxShadow: "0 4px 0 #7b96db",
                       transition: "all 0.15s",
                       whiteSpace: "nowrap",
                     }}

@@ -255,7 +255,7 @@ export default function Markets() {
 
         {/* ── Navbar ── */}
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 5vw", borderBottom: "1px solid rgba(10,13,20,0.06)" }}>
-          <span style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "1.2rem", color: "#0a0d14" }}>
+          <span style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "1.2rem", color: "#0a0d14", fontWeight: 650 }}>
             LOFIBets
           </span>
 
