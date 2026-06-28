@@ -4,20 +4,20 @@ import { useState } from "react";
 const MOCK_BETS = [
   {
     id: "receipt_1",
-    question: "Will Argentina win their 2026 World Cup match today?",
+    question: "Will Messi score a goal in the Argentina vs Jordan match?",
     category: "World Cup",
     choice: "YES",
-    amount: 500,
+    amount: 40,
     resolved: true,
     won: true,
-    payout: 1240,
+    payout: 124,
   },
   {
     id: "receipt_2",
     question: "Will $LOFI hit $1 before the end of July 2026?",
     category: "$LOFI",
     choice: "YES",
-    amount: 200,
+    amount: 20,
     resolved: false,
     won: false,
     payout: 0,
@@ -27,7 +27,7 @@ const MOCK_BETS = [
     question: "Will Sui Network surpass $10B TVL by Q3 2026?",
     category: "Sui",
     choice: "NO",
-    amount: 350,
+    amount: 35,
     resolved: true,
     won: false,
     payout: 0,
@@ -52,7 +52,7 @@ interface PnLCardProps {
   onClaim: () => void;
 }
 
-function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
+function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
   const profit = bet.payout - bet.amount;
 
   return (
@@ -223,7 +223,7 @@ function PnLCard({ bet, yetiImage, onClose, onClaim }: PnLCardProps) {
               onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
               onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
             >
-              Claim {bet.payout} LOFI →
+              Claim {bet.payout} SUI →
             </button>
           )}
 
@@ -349,7 +349,7 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
                     </span>
                     {/* amount */}
                     <span style={{ fontSize: "0.75rem", color: "rgba(10,13,20,0.4)", fontWeight: 500 }}>
-                      {bet.amount} LOFI
+                      {bet.amount} SUI
                     </span>
                     {/* status */}
                     <span style={{

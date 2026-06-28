@@ -192,7 +192,7 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
 
         {/* Amount label */}
         <p style={{ fontSize: "0.75rem", fontWeight: 500, textTransform: "uppercase", color: "rgba(10,13,20,0.4)", marginBottom: "8px" }}>
-          Amount ($LOFI)
+          Amount ($SUI)
         </p>
 
         {/* Amount input */}
@@ -390,7 +390,7 @@ export default function Markets() {
                 {/* Volume + bet buttons */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "12px", borderTop: "1px solid rgba(10,13,20,0.06)" }}>
                   <span style={{ fontSize: "0.75rem", color: "rgba(10,13,20,0.4)", fontWeight: 500 }}>
-                    {formatPool(market.yesPool + market.noPool)} $LOFI
+                    {formatPool(market.yesPool + market.noPool)} $SUI
                   </span>
 
                   <div style={{ display: "flex", gap: "8px" }}>
