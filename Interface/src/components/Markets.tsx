@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyBets from "./MyBets";
+import  WalletButton from "./Walletbutton";
+
 
 const MARKETS = [
   {
@@ -278,24 +280,10 @@ export default function Markets() {
             >
               My Bets
             </button>
-            <button
-              style={{
-                fontFamily: "'Elms Sans', sans-serif",
-                fontSize: "0.9rem",
-                fontWeight: 700,
-                padding: "12px 24px",
-                background: "#3d4f7c",
-                color: "#ffffff",
-                border: "none",
-                cursor: "pointer",
-                boxShadow: "0 5px 0 #232d47",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Connect Wallet
-            </button>
+            <WalletButton />
           </div>
         </nav>
+          
 
         {/* ── Page header ── */}
         <div style={{ padding: "48px 5vw 24px", display:"flex", gap:"12px" }}>
