@@ -12,3 +12,7 @@
   display: none;
 }
 
+[data-dapp-kit], [data-dapp-kit] * {
+  --dapp-kit-typography-fontFamily: 'Elms Sans', sans-serif !important;
+}
+
