@@ -67,7 +67,7 @@ const DEFAULT_ITEMS: MenuItem[] = [
 ];
 
 export default function BubbleMenu({
-  logo,
+
   onMenuClick,
   className,
   style,
