@@ -1,17 +1,16 @@
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { MoveUpRight} from 'lucide-react'
 import BubbleMenu from "./BubbleMenu";
 
-const NAV_ITEMS = ["Markets", "My Bets", "Leaderboard", "About"];
+
 
 interface HeroProps {
   heroImage: string;
   logoImage: string;
 }
 
-export default function Hero({ heroImage, logoImage }: HeroProps) {
-  const [activeNav, setActiveNav] = useState("Markets");
+export default function Hero({ heroImage }: HeroProps) {
   const navigate = useNavigate();
 
   return (

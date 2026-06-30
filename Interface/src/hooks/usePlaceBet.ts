@@ -1,10 +1,10 @@
-import { useSignAndExecuteTransaction, useSuiClient } from '@mysten/dapp-kit'
+import { useSignAndExecuteTransaction } from '@mysten/dapp-kit'
 import { Transaction } from '@mysten/sui/transactions'
 import { PACKAGE_ID, MARKET_ID } from '../constants'
 
 export function usePlaceBet() {
   const { mutate: signAndExecute, isPending } = useSignAndExecuteTransaction()
-  const client = useSuiClient()
+  
 
   function placeBet(
     choice: boolean,
