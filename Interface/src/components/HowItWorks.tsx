@@ -37,7 +37,7 @@ export default function HowItWorks() {
             How It Works
           </h1>
           <p className="text-lg md:text-xl font-bold text-white/80 leading-relaxed">
-            1. Connect your Wallet <br /> 2. Find a market <br /> 3. Place a bet with your $LOFI  or $SUI tokens and Win.
+            1. Connect your Wallet <br /> 2. Find a market <br /> 3. Place a bet with your $SUI tokens and Win.
           </p>
 
           {/* <button className="fixed top-6 left-6 z-30 text-black text-lg bg-white w-32 h-9 font-bold cursor-pointer transition-all hover:translate-x-[4px] duration-200 rounded-2xl" style={{ fontFamily: "Elms Sans, san-serif" }}>

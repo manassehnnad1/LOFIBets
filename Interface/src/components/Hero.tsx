@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MoveUpRight} from 'lucide-react'
 import BubbleMenu from "./BubbleMenu";
 
@@ -11,6 +12,7 @@ interface HeroProps {
 
 export default function Hero({ heroImage, logoImage }: HeroProps) {
   const [activeNav, setActiveNav] = useState("Markets");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -83,9 +85,10 @@ export default function Hero({ heroImage, logoImage }: HeroProps) {
               Win.
             </h1>
 
-            <p className="text-white translate-x-8 md:translate-x-2 translate-y-2">Trade Markets with your $LOFI tokens.</p>
+            <p className="text-white text-lg translate-x-8 md:translate-x-2 translate-y-2">Trade Markets directly on SUI.</p>
 
             <button
+              onClick={() => navigate('/markets')}
               className="rounded-2xl text-lg font-semibold text-[#0a0d14] cursor-pointer border-none transition-all hover:translate-x-[4px] duration-200 translate-y-4 md:w-[400px] w-full"
               style={{
                 background: "#ffffff",

@@ -11,6 +11,7 @@ import useLenis from './hooks/useLenis'
 import HowItWorks from './components/HowItWorks'
 import Markets from './components/Markets'
 import MyBets from './components/MyBets'
+import { BetsProvider } from "./context/BetsContext";
 
 const Home = () => (
   <div>
@@ -19,17 +20,18 @@ const Home = () => (
 )
 
 const App = () => {
-
   useLenis()
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/markets" element={<Markets />} />
-        <Route path="/my-bets" element={<MyBets />} />
-      </Routes>
+      <BetsProvider>  
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/markets" element={<Markets />} />
+          <Route path="/my-bets" element={<MyBets />} />
+        </Routes>
+      </BetsProvider>
     </BrowserRouter>
   )
 }

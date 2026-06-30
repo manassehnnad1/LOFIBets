@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MyBets from "./MyBets";
-import  WalletButton from "./Walletbutton";
-
+import WalletButton from "./Walletbutton";
+import { useCurrentAccount } from '@mysten/dapp-kit'
+import { usePlaceBet } from '../hooks/usePlaceBet'
+import { useBets } from '../context/BetsContext'
 
 const MARKETS = [
   {
-    id: "1",
+    id: "0x0037d035d753f0ca4eb83ece5657ad92457633a31de1b4d617b78a79922f2c18",
     question: "Will France win their 2026 World Cup match today?",
     category: "World Cup",
     yesPool: 12400,
     noPool: 8600,
     endsAt: "June 26, 2026",
-    image: "/imgy3.jpg", 
+    image: "/imgy3.jpg",
   },
   {
-    id: "2",
+    id: "0x0037d035d753f0ca4eb83ece5657ad92457633a31de1b4d617b78a79922f2c18",
     question: "Will $LOFI hit $1 before the end of July 2026?",
     category: "$LOFI",
     yesPool: 34200,
@@ -24,7 +25,7 @@ const MARKETS = [
     image: "/imgy2.jpg",
   },
   {
-    id: "3",
+    id: "0x0037d035d753f0ca4eb83ece5657ad92457633a31de1b4d617b78a79922f2c18",
     question: "Will Sui Network surpass $10B TVL by Q3 2026?",
     category: "Sui",
     yesPool: 9100,
@@ -33,7 +34,7 @@ const MARKETS = [
     image: "/imgy4.jpg",
   },
   {
-    id: "4",
+    id: "0x0037d035d753f0ca4eb83ece5657ad92457633a31de1b4d617b78a79922f2c18",
     question: "Will Messi score a goal in the Argentina vs. Jordan match?",
     category: "World Cup",
     yesPool: 9100,
@@ -72,6 +73,10 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
   const [choice, setChoice] = useState<"yes" | "no" | null>(null);
   const [amount, setAmount] = useState("");
   const { yesPct, noPct } = getPct(market.yesPool, market.noPool);
+  const account = useCurrentAccount()
+  const { placeBet, isPending } = usePlaceBet()
+  const { addBet } = useBets()                                          // ← NEW
+  const [txStatus, setTxStatus] = useState<"idle" | "success" | "error">("idle")
 
   return (
     <div
@@ -129,7 +134,7 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
           {market.question}
         </h3>
 
-        {/* ── Market image (modal) ── */}
+        {/* Market image */}
         <div style={{ width: "100%", borderRadius: "36px", overflow: "visible", marginBottom: "20px", aspectRatio: "8/5" }}>
           <img
             src={market.image}
@@ -210,27 +215,63 @@ function BetModal({ market, onClose }: { market: Market; onClose: () => void }) 
 
         {/* Place bet */}
         <button
-          disabled={!choice || !amount}
+          disabled={!choice || !amount || !account || isPending}
+          onClick={() => {
+            if (!choice || !amount) return
+            const mist = BigInt(Math.floor(parseFloat(amount) * 1_000_000_000))  // ← bigint fix
+            placeBet(
+              choice === "yes",
+              Number(mist),
+              () => {
+                addBet({
+                  id: `${market.id}_${Date.now()}`,
+                  question: market.question,
+                  category: market.category,
+                  choice: choice.toUpperCase() as "YES" | "NO",
+                  amount: parseFloat(amount),
+                  resolved: false,
+                  won: false,
+                  payout: 0,
+                })
+                setTxStatus("success")
+              },
+              () => setTxStatus("error")
+            )
+          }}
           style={{
             width: "100%",
             padding: "16px",
             fontFamily: "'Elms Sans', sans-serif",
             fontSize: "1rem",
             fontWeight: 700,
-            cursor: choice && amount ? "pointer" : "not-allowed",
+            cursor: choice && amount && account && !isPending ? "pointer" : "not-allowed",
             border: "none",
-            background: choice && amount ? "#3d4f7c" : "#f4f6f9",
-            color: choice && amount ? "#ffffff" : "rgba(10,13,20,0.3)",
-            boxShadow: choice && amount ? "0 5px 0 #1a6fd4" : "0 5px 0 #d8dce2",
-            transition: "all 0.15s",
-            opacity: choice && amount ? 1 : 0.6,
+            background: choice && amount && account ? "#3d4f7c" : "#f4f6f9",
+            color: choice && amount && account ? "#ffffff" : "rgba(10,13,20,0.3)",
+            opacity: choice && amount && account && !isPending ? 1 : 0.6,
           }}
         >
-          Place Bet →
+          {isPending ? "Confirming..." : txStatus === "success" ? "Bet Placed! ✓" : "Place Bet →"}
         </button>
 
+        {!account && (
+          <p style={{ textAlign: "center", fontSize: "0.75rem", color: "#e53e3e", marginTop: "8px" }}>
+            Connect your wallet to place a bet
+          </p>
+        )}
+        {txStatus === "success" && (
+          <p style={{ textAlign: "center", fontSize: "0.75rem", color: "#16a34a", marginTop: "8px" }}>
+            Transaction confirmed! Check My Bets.
+          </p>
+        )}
+        {txStatus === "error" && (
+          <p style={{ textAlign: "center", fontSize: "0.75rem", color: "#e53e3e", marginTop: "8px" }}>
+            Transaction failed. Try again.
+          </p>
+        )}
+
         <p style={{ textAlign: "center", fontSize: "0.7rem", color: "rgba(10,13,20,0.3)", marginTop: "14px" }}>
-          Ends {market.endsAt} 
+          Ends {market.endsAt}
         </p>
       </div>
     </div>
@@ -255,7 +296,7 @@ export default function Markets() {
 
       <div style={{ minHeight: "100vh", background: "#ffffff", fontFamily: "'Elms Sans', sans-serif" }}>
 
-        {/* ── Navbar ── */}
+        {/* Navbar */}
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 5vw", borderBottom: "1px solid rgba(10,13,20,0.06)" }}>
           <span style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "1.2rem", color: "#0a0d14", fontWeight: 650 }}>
             LOFIBets
@@ -283,16 +324,15 @@ export default function Markets() {
             <WalletButton />
           </div>
         </nav>
-          
 
-        {/* ── Page header ── */}
-        <div style={{ padding: "48px 5vw 24px", display:"flex", gap:"12px" }}>
+        {/* Page header */}
+        <div style={{ padding: "48px 5vw 24px", display: "flex", gap: "12px" }}>
           <h1 style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "clamp(1.0rem, 4vw, 1.0rem)", color: "#0a0d14", margin: "0 0 6px" }}>
             All Markets
           </h1>
         </div>
 
-        {/* ── Category filter ── */}
+        {/* Category filter */}
         <div style={{ padding: "0 5vw 32px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
           {CATEGORIES.map((cat) => (
             <button
@@ -316,7 +356,7 @@ export default function Markets() {
           ))}
         </div>
 
-        {/* ── Markets grid ── */}
+        {/* Markets grid */}
         <div style={{ padding: "0 5vw 80px", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "20px" }}>
           {filtered.map((market) => {
             const { yesPct, noPct } = getPct(market.yesPool, market.noPool);
@@ -327,7 +367,6 @@ export default function Markets() {
                 style={{
                   background: "#ffffff",
                   border: "2px solid rgba(10,13,20,0.07)",
-
                   padding: "24px",
                   display: "flex",
                   flexDirection: "column",
@@ -339,13 +378,10 @@ export default function Markets() {
                 onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-4px)")}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
               >
-                {/* Top row — category + small image thumbnail */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#3d4f7c" }}>
-                {market.category}
+                    {market.category}
                   </span>
-
-                  {/* ── Small thumbnail image ── */}
                   <img
                     src={market.image}
                     alt={market.category}
@@ -359,23 +395,19 @@ export default function Markets() {
                   />
                 </div>
 
-                {/* Question */}
                 <h3 style={{ fontFamily: "'Elms Sans', sans-serif", fontSize: "0.95rem", color: "#0a0d14", margin: 0, lineHeight: 1.4 }}>
                   {market.question}
                 </h3>
 
-                {/* Pool bar */}
                 <div style={{ width: "100%", height: "6px", borderRadius: "999px", background: "#f4f6f9", overflow: "hidden" }}>
                   <div style={{ width: `${yesPct}%`, height: "100%", borderRadius: "999px", background: "linear-gradient(to right, #3d4f7c, #6db8ff)" }} />
                 </div>
 
-                {/* Pct labels */}
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", fontWeight: 600 }}>
                   <span style={{ color: "#3d4f7c" }}>YES {yesPct}%</span>
                   <span style={{ color: "rgba(10,13,20,0.4)" }}>NO {noPct}%</span>
                 </div>
 
-                {/* Volume + bet buttons */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "12px", borderTop: "1px solid rgba(10,13,20,0.06)" }}>
                   <span style={{ fontSize: "0.75rem", color: "rgba(10,13,20,0.4)", fontWeight: 500 }}>
                     {formatPool(market.yesPool + market.noPool)} $SUI

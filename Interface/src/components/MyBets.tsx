@@ -1,60 +1,15 @@
 import { useState } from "react";
-
-// Mock data — replace with real on-chain BetReceipt query after contract deploy
-const MOCK_BETS = [
-  {
-    id: "receipt_1",
-    question: "Will Messi score a goal in the Argentina vs Jordan match?",
-    category: "World Cup",
-    choice: "YES",
-    amount: 40,
-    resolved: true,
-    won: true,
-    payout: 124,
-  },
-  {
-    id: "receipt_2",
-    question: "Will $LOFI hit $1 before the end of July 2026?",
-    category: "$LOFI",
-    choice: "YES",
-    amount: 20,
-    resolved: false,
-    won: false,
-    payout: 0,
-  },
-  {
-    id: "receipt_3",
-    question: "Will Sui Network surpass $10B TVL by Q3 2026?",
-    category: "Sui",
-    choice: "NO",
-    amount: 35,
-    resolved: true,
-    won: false,
-    payout: 0,
-  },
-];
-
-interface Bet {
-  id: string;
-  question: string;
-  category: string;
-  choice: string;
-  amount: number;
-  resolved: boolean;
-  won: boolean;
-  payout: number;
-}
+import { useBets } from "../context/BetsContext";
+import type { PlacedBet } from "../context/BetsContext";
 
 interface PnLCardProps {
-  bet: Bet;
+  bet: PlacedBet;
   yetiImage: string;
   onClose: () => void;
   onClaim: () => void;
 }
 
 function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
-  const profit = bet.payout - bet.amount;
-
   return (
     <div
       onClick={onClose}
@@ -82,7 +37,7 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
           position: "relative",
         }}
       >
-        {/* ── Card top — orange background with yeti image ── */}
+        {/* Card top — image */}
         <div
           style={{
             background: "linear-gradient(135deg, #ff8c00, #ff6b00)",
@@ -103,25 +58,8 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
             pointerEvents: "none",
           }} />
 
-          {/* top bar */}
-          <div style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "16px",
-            position: "relative",
-            zIndex: 1,
-          }}>
-          </div>
-
           {/* Yeti image */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 0,
-            overflow: "hidden",
-          }}>
+          <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
             <img
               src="/pnl1.jpg"
               alt="Yeti"
@@ -134,41 +72,11 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
               }}
             />
           </div>
-          <div style={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            position: "relative",
-            zIndex: 1,
-          }}>
-            {/* top bar */}
-            <div style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "16px",
-              position: "relative",
-              zIndex: 1,
-            }}>
-              
-            </div>
-          </div>
         </div>
 
-        {/* ── Card bottom — dark section ── */}
-        <div style={{
-          background: "#0a0d14",
-          padding: "20px 24px 24px",
-        }}>
-          {/* checkpoint line */}
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "6px",
-          }}>
+        {/* Card bottom — dark section */}
+        <div style={{ background: "#0a0d14", padding: "20px 24px 24px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
             <span style={{
               fontSize: "0.6rem",
               fontWeight: 700,
@@ -179,7 +87,6 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
             </span>
           </div>
 
-          {/* result headline */}
           <h2 style={{
             fontFamily: "'Slackey', sans-serif",
             fontSize: "1.6rem",
@@ -190,7 +97,6 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
             {bet.won ? "You Won! 🎉" : "Better Luck Next Time"}
           </h2>
 
-          {/* question */}
           <p style={{
             fontSize: "0.75rem",
             color: "rgba(255,255,255,0.45)",
@@ -201,9 +107,7 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
             {bet.question}
           </p>
 
-
-          {/* claim button */}
-          {bet.won && (
+          {bet.won ? (
             <button
               onClick={onClaim}
               style={{
@@ -225,9 +129,7 @@ function PnLCard({ bet, onClose, onClaim }: PnLCardProps) {
             >
               Claim {bet.payout} SUI →
             </button>
-          )}
-
-          {!bet.won && (
+          ) : (
             <button
               onClick={onClose}
               style={{
@@ -258,13 +160,14 @@ interface MyBetsProps {
 }
 
 export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
-  const [selectedBet, setSelectedBet] = useState<Bet | null>(null);
+  const { bets } = useBets();
+  const [selectedBet, setSelectedBet] = useState<PlacedBet | null>(null);
   const [claimed, setClaimed] = useState<string[]>([]);
 
   function handleClaim() {
     if (selectedBet) {
-      setClaimed((prev) => [...prev, selectedBet.id])
-      setSelectedBet(null)
+      setClaimed((prev) => [...prev, selectedBet.id]);
+      setSelectedBet(null);
     }
   }
 
@@ -275,7 +178,7 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
         rel="stylesheet"
       />
 
-      <div style={{ padding: "32px 5vw", fontFamily: "'Inter', sans-serif" }}>
+      <div style={{ padding: "32px 5vw", fontFamily: "'Elms Sans', sans-serif" }}>
 
         {/* Section header */}
         <div style={{ marginBottom: "24px" }}>
@@ -288,9 +191,18 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
             My Bets
           </h2>
           <p style={{ fontSize: "0.82rem", color: "rgba(10,13,20,0.4)", margin: 0 }}>
-            {MOCK_BETS.length} active positions
+            {bets.length} active position{bets.length !== 1 ? "s" : ""}
           </p>
         </div>
+
+        {/* Empty state */}
+        {bets.length === 0 && (
+          <div style={{ textAlign: "center", marginTop: "80px" }}>
+            <p style={{ fontSize: "0.9rem", color: "rgba(10,13,20,0.4)", fontFamily: "'Elms Sans', sans-serif" }}>
+              No bets yet. Go place one! 
+            </p>
+          </div>
+        )}
 
         {/* Bets list */}
         <div style={{
@@ -300,8 +212,8 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
           maxWidth: "640px",
           margin: "0 auto",
         }}>
-          {MOCK_BETS.map((bet) => {
-            const isClaimed = claimed.includes(bet.id)
+          {bets.map((bet) => {
+            const isClaimed = claimed.includes(bet.id);
             return (
               <div
                 key={bet.id}
@@ -409,7 +321,7 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
                   </span>
                 )}
               </div>
-            )
+            );
           })}
         </div>
       </div>
@@ -424,5 +336,5 @@ export default function MyBets({ yetiImage = "/heroimg.png" }: MyBetsProps) {
         />
       )}
     </>
-  )
+  );
 }
