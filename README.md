@@ -80,5 +80,5 @@ This was built end-to-end in under a week for the hackathon, with a few delibera
 
 ---
 
-This is an early build. I'm actively shipping improvements and would love the opportunity to take LOFIBets further with grant support from the Sui ecosystem.
+This is an early build. I'm actively shipping improvements (Contract, Interface, flow, etc) and would love the opportunity to take LOFIBets further with grant support from the Sui ecosystem as I see this getting really big for LOFI and the SUI eco at large.
 
